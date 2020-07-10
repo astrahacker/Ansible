@@ -1,0 +1,42 @@
+
+#  - name: Import the public key used by the package management system
+#    apt_key: keyserver=hkp://keyserver.ubuntu.com:80 id=7F0CEB10 state=present
+#  - name: Add MongoDB repository
+#    apt_repository: repo='deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse' state=present
+#  - name: install mongodb
+#    apt: pkg=mongodb-org state=latest update_cache=yes allow_unauthenticated=yes
+#    notify:
+#    - start mongodb
+#    handlers:
+#    - name: start mongodb
+#      service: name=mongod state=started
+
+- name: MongoDB | Import public Key 
+  apt_key:
+    keyserver: hkp://keyserver.ubuntu.com:80
+    id: EA312927
+
+- name: MongoDB | Add Respository
+  apt_repository:
+   filename: '/etc/apt/sources.list.d/mongodb-org-3.2.list'
+   repo: 'deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse'
+   state: present
+   update_cache: yes
+  
+- name: MongoDB | Install MongoDB
+  apt:
+   name: mongodb-org
+   state: present
+   update_cache: yes
+   allow_unauthenticated: yes
+
+#- name: just force systemd to reread configs (2.4 and above)
+#  systemd: daemon_reload=yes
+ 
+#- name: MongoDB | Ensure MongoDB is Running
+  #systemd: daemon_reload=yes
+ # service:
+  #  name: mongod
+   # state: started
+   # daemon-reload: true
+   # user: true

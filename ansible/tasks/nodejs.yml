@@ -1,0 +1,32 @@
+
+#################################################################
+
+- name: Nodejs | Get Script
+  get_url:
+     url: "http://deb.nodesource.com/setup_10.x"
+     dest: "{{ temp_folder }}/nodejs.sh"
+     
+
+- name: NodeJs | Set Execution Permission
+  file: 
+    path: "{{ temp_folder }}/nodejs.sh"
+    mode: "u+x"
+
+- name: NodeJs | Execute Installation Script
+  shell: "{{ temp_folder }}/nodejs.sh"
+
+- name: NodeJs | Remove Installtion Script
+  file:
+    path: "{{ temp_folder }}/nodejs.sh"
+    state: absent
+
+- name: NodeJS | Install Node.JS
+  apt: name={{ item }} state=present update_cache=yes
+  with_items:
+     - build-essential
+     - nodejs
+
+- name: NodeJS | Install angular cli globally
+  npm: name={{ item }} state=present global=yes
+  with_items:
+   - "@angular/cli"
