@@ -9,7 +9,7 @@ Need to edit /etc/ansible/ansible.cfg
 # ansible.cfg in the current working directory, .ansible.cfg in
 # the home directory or /etc/ansible/ansible.cfg, whichever it
 # finds first
-
+--------------------------------------------------------------
 [defaults]
 
 # some basic default values...
@@ -29,33 +29,16 @@ sudo_user      = root
 #remote_port    = 22
 #module_lang    = C
 #module_set_locale = False
-
+---------------------------------------------------------
 
 Also /etc/ansible/hosts
 
 [local]
-locahost
 
 [servers]
+IP
 
-172.16.10.158
+Command 
 
-
-[all:vars]
-ansible_connection=ssh
-ansible_user=blockchaintestproj
-ansible_ssh_pass=Zenlbs@1
-
-
-# This is the default ansible 'hosts' file.
-#
-# It should live in /etc/ansible/hosts
-#
-#   - Comments begin with the '#' character
-#   - Blank lines are ignored
-#   - Groups of hosts are delimited by [header] elements
-#   - You can enter hostnames or ip addresses
-#   - A hostname/ip can be a member of multiple groups
-
-# Ex 1: Ungrouped hosts, specify before any group headers.
+ansible-playbook main.yml --extra-vars "ansible_sudo_pass=Zenlbs@1" -vvvv
 
