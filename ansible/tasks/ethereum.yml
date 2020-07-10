@@ -1,0 +1,14 @@
+
+- name: Ethereum Install | Setup Repo
+  apt_repository: 
+     repo: 'deb http://ppa.launchpad.net/ethereum/ethereum/ubuntu xenial main'
+     state: present
+     update_cache: yes
+
+- name : Ethereum Install | Install Package 
+  apt: 
+    name: ethereum
+    state: present
+    update_cache: yes
+    allow_unauthenticated: yes
+
