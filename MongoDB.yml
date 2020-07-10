@@ -1,3 +1,4 @@
+#direct 
 ---
 - hosts: servers
   remote_user: root
